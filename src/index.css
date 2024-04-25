@@ -1,0 +1,17 @@
+#container {
+  display: flex;
+  flex-direction: column;
+  height: 40vh;
+  width: 50vw;
+  background-color: red;
+}
+
+#top-block,
+#bottom-block {
+  background-color: blue;
+  flex: 1;
+}
+
+#middle-block {
+  flex: 2;
+}
