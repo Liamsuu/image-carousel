@@ -1,1 +1,1 @@
-# webpack-boilerplate
+# Image-Carousel

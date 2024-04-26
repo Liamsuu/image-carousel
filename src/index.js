@@ -20,9 +20,8 @@ function createSlidesSkeleton() {
   changeImageArrowsHolder.style.width = "100%";
   changeImageArrowsHolder.style.height = "15%";
 
-  containerFrame.style.height = "50vh";
-  containerFrame.style.width = "40vw";
   containerFrame.style.display = "flex";
+  containerFrame.style.flex = 1;
   containerFrame.style.flexDirection = "column";
   containerFrame.style.backgroundSize = "cover";
 
@@ -74,13 +73,13 @@ sandPic.src = sandImage;
 
 const images = [lady, sandPic];
 
-const element = document.querySelector("div"); // just for testing, add ability to specify where to append in the future.
+const element = document.querySelector("div");
+element.style.marginLeft = "auto";
+element.style.marginRight = "auto";
 
+element.style.height = "50vh";
+element.style.width = "70vh";
+element.style.display = "flex";
+
+// whatever the element that holds the image carousel is, make it a display flex so the carousel can take up its whole size.
 createCarousel(images, element);
-
-/**
- * just search inside the skeleton and add an event listener on the container to listen
- * for how much time passed. and every x amount of seconds change the image to one of the ones in the image array thats passed in the parameter.
- * after the image changes, the circles on the bottom should highlight, the one highlighted should be the circle
- * of the same index as the image shown. If the arrow is clicked reset timer and go either one left in the index, or one right in the index.
- */
