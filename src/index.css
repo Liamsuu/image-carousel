@@ -1,17 +1,31 @@
 #container {
   display: flex;
   flex-direction: column;
-  height: 40vh;
-  width: 50vw;
-  background-color: red;
+  height: 50vh;
+  width: 40vw;
+  background-image: url(./pexels-olly-789822.jpg);
+  background-size: cover;
+  /* background-repeat: no-repeat; */
+  /* background-color: red; */
 }
 
-#top-block,
+#top-block {
+  /* this will hold the div that contains the arrows */
+  display: flex;
+  /* background-color: blue; */
+  align-items: center;
+  flex: 4;
+}
+
+#arrow-holder {
+  background-color: green;
+  width: 100%;
+  height: 15%;
+}
+
 #bottom-block {
-  background-color: blue;
   flex: 1;
+  background-color: yellow;
 }
 
-#middle-block {
-  flex: 2;
-}
+/* everything in here will be removed after. This is currently just for development purposes and visualisation */
