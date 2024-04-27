@@ -1,6 +1,8 @@
 import "./index.css";
 import sandImage from "./pexels-marcelo-gonzalez-1141370437-20923044.jpg";
 import happyLadyImage from "./pexels-olly-789822.jpg";
+import leftArrowImg from "./chevron-left.svg";
+import rightArrowImg from "./chevron-right.svg";
 
 function createSlidesSkeleton() {
   const containerFrame = document.createElement("div");
@@ -19,6 +21,15 @@ function createSlidesSkeleton() {
 
   changeImageArrowsHolder.style.width = "100%";
   changeImageArrowsHolder.style.height = "15%";
+  changeImageArrowsHolder.style.display = "flex";
+  const leftArrow = new Image();
+  const rightArrow = new Image();
+  leftArrow.src = leftArrowImg;
+  rightArrow.src = rightArrowImg;
+  leftArrow.style.height = "4rem";
+  leftArrow.style.marginRight = "auto";
+  rightArrow.style.height = "4rem";
+  changeImageArrowsHolder.append(leftArrow, rightArrow);
 
   containerFrame.style.display = "flex";
   containerFrame.style.flex = 1;
@@ -34,20 +45,57 @@ function createSlidesSkeleton() {
 let currentlySelectedIndex = 0; // will store number of currently selected image's index
 
 function changeImage(carouselSkeleton, images) {
-  setTimeout(() => {
-    const carouselFrame = carouselSkeleton;
-    const numOfImages = images.length - 1;
+  let buttonClicked = false;
+  let timer;
+  const carouselFrame = carouselSkeleton;
+  const numOfImages = images.length - 1;
+  const leftButton = carouselFrame.firstChild.firstChild.firstChild;
+  const rightButton =
+    carouselFrame.firstChild.firstChild.firstChild.nextSibling;
 
+  leftButton.onclick = () => {
+    clearTimeout(timer);
+    if (currentlySelectedIndex === 0) {
+      currentlySelectedIndex = numOfImages;
+      carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
+      changeImage(carouselFrame, images);
+    } else {
+      currentlySelectedIndex -= 1;
+      carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
+      changeImage(carouselFrame, images);
+    }
+    buttonClicked = true;
+  };
+
+  rightButton.onclick = () => {
+    clearTimeout(timer);
     if (currentlySelectedIndex === numOfImages) {
       currentlySelectedIndex = 0;
       carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
+      changeImage(carouselFrame, images);
     } else {
       currentlySelectedIndex += 1;
       carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
+      changeImage(carouselFrame, images);
+    }
+    buttonClicked = true;
+  };
+
+  timer = setTimeout(() => {
+    if (buttonClicked === false) {
+      if (currentlySelectedIndex === numOfImages) {
+        currentlySelectedIndex = 0;
+        carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
+        changeImage(carouselFrame, images); // might need to remove
+      } else {
+        currentlySelectedIndex += 1;
+        carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
+        changeImage(carouselFrame, images); // might need to remove
+      }
     }
 
-    changeImage(carouselFrame, images);
-  }, 10000);
+    // changeImage(carouselFrame, images);
+  }, 5000);
 }
 
 function carouselFunctionality(carouselSkeleton, images, elementToAppendTo) {
