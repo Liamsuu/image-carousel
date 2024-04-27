@@ -1,15 +1,29 @@
 {
   "name": "easy-image-carousel",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.2",
+  "description": "Easily create an image carousel with a single flex div container.",
+  "main": "./dist/image-carousel.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "start": "webpack serve --open"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Liamsuu/image-carousel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Liamsuu/image-carousel/issues"
+  },
+  "homepage": "https://github.com/Liamsuu/image-carousel",
+  "keywords": [
+    "image-carousel",
+    "carousel"
+  ],
+  "author": "Liam Colley",
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^7.1.1",
@@ -17,8 +31,11 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.6.0",
     "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.10",
+    "url-loader": "^4.1.1",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4"

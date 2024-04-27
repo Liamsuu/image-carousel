@@ -1,5 +1,3 @@
-import sandImage from "./pexels-marcelo-gonzalez-1141370437-20923044.jpg";
-import happyLadyImage from "./pexels-olly-789822.jpg";
 import leftArrowImg from "./chevron-left.svg";
 import rightArrowImg from "./chevron-right.svg";
 
@@ -81,12 +79,12 @@ function changeImage(carouselSkeleton, images) {
     if (currentlySelectedIndex === 0) {
       currentlySelectedIndex = numOfImages;
       carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
-      currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame); // check if it works, if not edit
+      currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame);
       changeImage(carouselFrame, images);
     } else {
       currentlySelectedIndex -= 1;
       carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
-      currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame); // check if it works, if not edit
+      currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame);
       changeImage(carouselFrame, images);
     }
     buttonClicked = true;
@@ -97,12 +95,12 @@ function changeImage(carouselSkeleton, images) {
     if (currentlySelectedIndex === numOfImages) {
       currentlySelectedIndex = 0;
       carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
-      currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame); // check if it works, if not edit
+      currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame);
       changeImage(carouselFrame, images);
     } else {
       currentlySelectedIndex += 1;
       carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
-      currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame); // check if it works, if not edit
+      currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame);
       changeImage(carouselFrame, images);
     }
     buttonClicked = true;
@@ -113,13 +111,13 @@ function changeImage(carouselSkeleton, images) {
       if (currentlySelectedIndex === numOfImages) {
         currentlySelectedIndex = 0;
         carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
-        currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame); // check if it works, if not edit
-        changeImage(carouselFrame, images); // might need to remove
+        currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame);
+        changeImage(carouselFrame, images);
       } else {
         currentlySelectedIndex += 1;
         carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
-        currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame); // check if it works, if not edit
-        changeImage(carouselFrame, images); // might need to remove
+        currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame);
+        changeImage(carouselFrame, images);
       }
     }
 
@@ -133,7 +131,7 @@ function carouselFunctionality(carouselSkeleton, images, elementToAppendTo) {
   // set initial image
   carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
   elementToAppendTo.appendChild(carouselFrame);
-  currentImageCircle(images.length - 1, currentlySelectedIndex, carouselFrame); // check if it works, if not edit
+  currentImageCircle(images.length - 1, currentlySelectedIndex, carouselFrame);
   changeImage(carouselFrame, images);
 }
 
@@ -143,21 +141,3 @@ export default function createCarousel(images, elementToAppendTo) {
 
   carouselFunctionality(carouselSkeleton, images, elementToAppendTo);
 }
-
-const lady = new Image();
-lady.src = happyLadyImage;
-const sandPic = new Image();
-sandPic.src = sandImage;
-
-const images = [lady, sandPic];
-
-const element = document.querySelector("div");
-element.style.marginLeft = "auto";
-element.style.marginRight = "auto";
-
-element.style.height = "50vh";
-element.style.width = "70vh";
-element.style.display = "flex";
-
-// whatever the element that holds the image carousel is, make it a display flex so the carousel can take up its whole size.
-createCarousel(images, element);

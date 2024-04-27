@@ -1,20 +1,22 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-  mode: "development",
-  devtool: "inline-source-map",
-
-  devServer: {
-    watchFiles: ["./src/index.html"],
-    static: "./dist",
-  },
+  mode: "production",
 
   entry: "./src/index.js",
+
+  experiments: {
+    outputModule: true,
+  },
+
   output: {
     filename: "image-carousel.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
+    library: {
+      type: "module",
+    },
   },
   module: {
     rules: [
@@ -24,19 +26,18 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: "asset/resource",
+        use: ["url-loader"],
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "./src/index.html",
-      title: "Change title here",
-      inject: "body",
-    }),
-  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          keep_fnames: true, // keep function names
+        },
+      }),
+    ],
+  },
 };
