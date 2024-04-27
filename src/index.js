@@ -1,4 +1,3 @@
-import "./index.css";
 import sandImage from "./pexels-marcelo-gonzalez-1141370437-20923044.jpg";
 import happyLadyImage from "./pexels-olly-789822.jpg";
 import leftArrowImg from "./chevron-left.svg";
@@ -37,9 +36,33 @@ function createSlidesSkeleton() {
   containerFrame.style.backgroundSize = "cover";
 
   currentImageIndex.style.flex = 1;
+  currentImageIndex.style.display = "flex"; // to center all circles
+  currentImageIndex.style.justifyContent = "center";
+  currentImageIndex.style.alignItems = "center";
+  currentImageIndex.style.gap = "1rem";
 
   containerFrame.append(topSection, currentImageIndex);
   return containerFrame;
+}
+
+function currentImageCircle(numOfImages, index, carouselSkeleton) {
+  const currentIndexContainer = carouselSkeleton.firstChild.nextSibling;
+  while (currentIndexContainer.firstChild !== null) {
+    currentIndexContainer.firstChild.remove();
+  }
+  for (let x = 0; x < numOfImages + 1; x += 1) {
+    const circle = document.createElement("div");
+    circle.dataset.index = x.toString();
+    circle.style.border = "1px solid white";
+    circle.style.borderRadius = "50%";
+    circle.style.height = "1rem";
+    circle.style.width = "1rem";
+    currentIndexContainer.appendChild(circle);
+
+    if (circle.dataset.index === index.toString()) {
+      circle.style.backgroundColor = "white";
+    }
+  }
 }
 
 let currentlySelectedIndex = 0; // will store number of currently selected image's index
@@ -58,10 +81,12 @@ function changeImage(carouselSkeleton, images) {
     if (currentlySelectedIndex === 0) {
       currentlySelectedIndex = numOfImages;
       carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
+      currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame); // check if it works, if not edit
       changeImage(carouselFrame, images);
     } else {
       currentlySelectedIndex -= 1;
       carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
+      currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame); // check if it works, if not edit
       changeImage(carouselFrame, images);
     }
     buttonClicked = true;
@@ -72,10 +97,12 @@ function changeImage(carouselSkeleton, images) {
     if (currentlySelectedIndex === numOfImages) {
       currentlySelectedIndex = 0;
       carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
+      currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame); // check if it works, if not edit
       changeImage(carouselFrame, images);
     } else {
       currentlySelectedIndex += 1;
       carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
+      currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame); // check if it works, if not edit
       changeImage(carouselFrame, images);
     }
     buttonClicked = true;
@@ -86,10 +113,12 @@ function changeImage(carouselSkeleton, images) {
       if (currentlySelectedIndex === numOfImages) {
         currentlySelectedIndex = 0;
         carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
+        currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame); // check if it works, if not edit
         changeImage(carouselFrame, images); // might need to remove
       } else {
         currentlySelectedIndex += 1;
         carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
+        currentImageCircle(numOfImages, currentlySelectedIndex, carouselFrame); // check if it works, if not edit
         changeImage(carouselFrame, images); // might need to remove
       }
     }
@@ -104,6 +133,7 @@ function carouselFunctionality(carouselSkeleton, images, elementToAppendTo) {
   // set initial image
   carouselFrame.style.backgroundImage = `url(${images[currentlySelectedIndex].src})`;
   elementToAppendTo.appendChild(carouselFrame);
+  currentImageCircle(images.length - 1, currentlySelectedIndex, carouselFrame); // check if it works, if not edit
   changeImage(carouselFrame, images);
 }
 
