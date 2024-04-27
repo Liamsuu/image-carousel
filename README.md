@@ -39,3 +39,5 @@ const imageCarouselContainer = document.querySelector("div");
 // Run function with the Images array and the div created above in the HTML.
 createCarousel(allCarouselImages, imageCarouselContainer);
 ```
+![example](https://github.com/Liamsuu/image-carousel/assets/58088106/950cfb2a-cafd-4661-a1ee-78da2302f956)
+
